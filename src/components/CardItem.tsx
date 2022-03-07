@@ -14,7 +14,6 @@ interface Props {
   category_id: string;
   advertised_start: AdvertisedStartType;
   setExpired: (value: boolean) => void;
-  // refetch: any;
 }
 
 export default function CardItem({

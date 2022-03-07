@@ -7,7 +7,6 @@ import {
   RaceSummaryType,
   DictionaryType,
 } from '../../types';
-import {act} from 'react-test-renderer';
 
 type RaceStateType = {
   race_summaries: RaceSummaryType[];
@@ -20,9 +19,6 @@ type RaceStateType = {
   filtered_race: [];
 };
 
-// export interface SetGlobalUiSetting {
-//   setting: GlobalUiSetting;
-// }
 export interface SetAllRacesAction {
   allRaces: RaceSummaryType[];
 }
@@ -67,7 +63,6 @@ export const racesSlice = createSlice({
       state: RaceStateType,
       action: PayloadAction<boolean>,
     ) => {
-      console.log(action.payload);
       state.harnessRaces = action.payload;
     },
     removeRaceById: (state: RaceStateType, action: PayloadAction<string>) => {
@@ -79,7 +74,6 @@ export const racesSlice = createSlice({
       if (index > -1) {
         newRaceSummaries.splice(index, 1);
       }
-      console.log('new races:', newRaceSummaries);
 
       state.race_summaries = newRaceSummaries;
     },

@@ -17,7 +17,6 @@ import {useAppSelector, useAppDispatch} from '../redux/store';
 import CardItem from './CardItem';
 import CheckboxGroup from './CheckboxGroup';
 import {RACING_IDS} from '../types';
-// import {useColorScheme} from 'react-native';
 
 interface Props {}
 
@@ -40,7 +39,6 @@ export default function Card({}: Props): ReactElement {
     let raceSummaries = await getRaces();
     setRaceSummary(raceSummaries);
     setFilteredRaceSummary(raceSummaries);
-    // return raceSummaries;
   }, []);
 
   const dispatch = useAppDispatch();
@@ -112,7 +110,7 @@ export default function Card({}: Props): ReactElement {
     );
   }
   return (
-    <>
+    <View style={styles.container}>
       <FlatList
         ListHeaderComponent={
           <CheckboxGroup
@@ -127,12 +125,12 @@ export default function Card({}: Props): ReactElement {
         maxToRenderPerBatch={5}
         extraData={expiredRace}
       />
-    </>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    height: '90vh',
+    height: '90%',
   },
 });

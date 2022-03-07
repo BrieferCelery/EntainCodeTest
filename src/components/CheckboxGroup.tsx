@@ -26,7 +26,6 @@ export default function CheckboxGroup(props: Props): ReactElement {
   const dispatch = useAppDispatch();
 
   const onToggleHarness = (value: boolean) => {
-    console.log(value);
     dispatch(toggleHarnessRaces(value));
     if (value) {
       props.onFilterChange();

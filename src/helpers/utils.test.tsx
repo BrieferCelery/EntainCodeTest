@@ -7,7 +7,7 @@ describe('test time formatter', () => {
   });
 
   it('should return a negative whole number', () => {
-    let actual = timeFormatter(-40);
-    return expect(actual).toEqual('-40s');
+    let example = timeFormatter(-40);
+    return expect(example).toEqual('-40s');
   });
 });
