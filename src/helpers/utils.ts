@@ -1,61 +1,22 @@
 export const handleResponse = async (
-  response: any,
-  responseType:
-    | 'HTML'
-    | 'JSON'
-    | 'TEXT'
-    | 'BUFFER'
-    | 'IMAGE'
-    | 'EMPTY' = 'JSON',
+  response: Response,
+  responseType: 'JSON' = 'JSON',
 ): Promise<any> => {
   //successfully get a response
   if (response.status === 200) {
-    if (responseType === 'IMAGE') {
-      //   return response.blob().then((blob: Blob): string => {
-      //     let objUrl = URL.createObjectURL(blob);
-      //     return objUrl;
-      //   });
-      //   let blob = await response.blob();
-      //   let objUrl = URL.createObjectURL(blob);
-      return response;
-    } else if (responseType === 'JSON') {
-      //   return response.json().then((json: JSON) => {
-      //     return json;
-      //   });
+    if (responseType === 'JSON') {
       let json: JSON = await response.json();
       return json;
-    } else if (responseType === 'TEXT') {
-      let body = response.body;
-      return body;
-    } else if (responseType === 'HTML') {
-      let text = await response.text();
-      return text;
-    } else if (responseType === 'EMPTY') {
-      return;
     } else {
       return {
         api: 'Wrong Response Type',
       };
     }
-  }
-  //unauthorised request detected by the api
-  else if (response.status === 401) {
-    //auto logout
-    //TODO: logout user
-  }
-  //content not found
-  else if (response.status === 400 || response.status === 404) {
-    // return response.json().then((json) => {
-    //   return Promise.reject(json.errors);
-    // });
-    let json = await response.json();
-    return Promise.reject(json.errors);
-  }
-  //all others responses
-  else
+  } else {
     return {
       api: response.status + ' ' + response.statusText,
     };
+  }
 };
 
 export const getInit = () => {
@@ -70,7 +31,32 @@ export const getInit = () => {
   return options;
 };
 
+export const timeFormatter = (time: number) => {
+  let hrs = Math.floor(time / 3600);
+  let mins = Math.floor((time % 3600) / 60);
+  let secs = Math.floor(time % 60);
+  // let negative = '';
+  if (time >= 0) {
+    if (hrs < 10) {
+      hrs;
+    }
+    if (mins < 10) {
+      ('');
+    }
+    if (secs < 10) {
+      secs;
+    }
+    return `${hrs > 0 ? hrs : ''} ${mins > 0 ? mins + 'm' : ''}${
+      secs > 0 ? secs + 's' : ''
+    }`;
+  } else {
+    let negative = '-' + Math.abs(time) + 's';
+    return negative;
+  }
+};
+
 export const unixTimeConverter = (time: number): number => {
   const currentTime = Math.round(new Date().getTime() / 1000);
+
   return time - currentTime;
 };

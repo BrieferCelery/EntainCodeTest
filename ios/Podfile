@@ -12,6 +12,8 @@ target 'EntainCodeTest' do
     :hermes_enabled => false
   )
 
+  pod 'RNCCheckbox', :path => '../node_modules/@react-native-community/checkbox'
+
   target 'EntainCodeTestTests' do
     inherit! :complete
     # Pods for testing
